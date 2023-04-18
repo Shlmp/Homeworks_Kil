@@ -5,6 +5,7 @@ using namespace std;
 
 void tarea1();
 void RockPaperScissors();
+void replay();
 int main()
 {
 	int homework;
@@ -161,60 +162,119 @@ void RockPaperScissors()
 	int counterPlayer = 0;
 	int counterEnemy = 0;
 	srand(time(NULL));
+	int again = 0;
 	do
 	{
-		system("cls");
-		int enemy = (rand() % 3) + 1;
-		int option = 0;
-
-		cout << enemy << endl;
-		if (enemy == 1)
+		do
 		{
-			cout << "   The cpu chose rock!" << endl;
-		}
-		else if (enemy == 2)
-		{
-			cout << "   The cpu chose paper!" << endl;
-		}
-		else if (enemy == 3)
-		{
-			cout << "   The cpu chose scissors!" << endl;
-		}
+			system("cls");
+			int enemy = (rand() % 3) + 1;
+			int option = 0;
 
-		cout << endl;
-
-		cout << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
-		cout << "Choose your option" << endl << "1 - rock" << endl << "2 - paper" << endl << "3 - scissors" << endl;
-		cin >> option;
-
-		switch (option)
-		{
-		case 1:
-			if (option < enemy)
+			cout << enemy << endl;
+			if (enemy == 1)
 			{
-				cout << "You lose" << endl;
-				counterEnemy += 1;
+				cout << "   The cpu chose rock!" << endl;
 			}
-			else if (option == enemy)
+			else if (enemy == 2)
 			{
-				cout << "You tied" << endl;
+				cout << "   The cpu chose paper!" << endl;
 			}
-			else if (option == 1 && enemy == 3)
+			else if (enemy == 3)
 			{
-				cout << "You win" << endl;
-				counterPlayer += 1;
+				cout << "   The cpu chose scissors!" << endl;
 			}
-			break;
-		case 2:
 
-			break;
-		case 3:
+			cout << endl;
 
-			break;
-		default:
-			break;
-		}
+			cout << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
+			cout << "Choose your option" << endl << "1 - rock" << endl << "2 - paper" << endl << "3 - scissors" << endl;
+			cin >> option;
+
+			switch (option)
+			{
+			case 1:
+				if (option == 1 && enemy == 2)
+				{
+					cout << "You lose" << endl;
+					counterEnemy += 1;
+				}
+				else if (option == enemy)
+				{
+					cout << "You tied" << endl;
+				}
+				else if (option == 1 && enemy == 3)
+				{
+					cout << "You win" << endl;
+					counterPlayer += 1;
+				}
+				break;
+			case 2:
+				if (option == 2 && enemy == 3)
+				{
+					cout << "You lose" << endl;
+					counterEnemy += 1;
+				}
+				else if (option == enemy)
+				{
+					cout << "You tied" << endl;
+				}
+				else if (option == 2 && enemy == 1)
+				{
+					cout << "You win" << endl;
+					counterPlayer += 1;
+				}
+				break;
+			case 3:
+				if (option == 3 && enemy == 1)
+				{
+					cout << "You lose" << endl;
+					counterEnemy += 1;
+				}
+				else if (option == enemy)
+				{
+					cout << "You tied" << endl;
+				}
+				else if (option == 3 && enemy == 2)
+				{
+					cout << "You win" << endl;
+					counterPlayer += 1;
+				}
+				break;
+			default:
+				break;
+			}
+			system("pause");
+		} while (counterEnemy < 2 && counterPlayer < 2);
+		cout << endl << "           Final Score" << endl << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
 		system("pause");
-	} while (counterEnemy < 2 && counterPlayer < 2);
-	cout << endl << "           Final Score" << endl << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
+		system("cls");
+
+		replay();
+	} while (again =! 1);
+}
+
+void replay()
+{
+	int again = 0;
+
+		cout << "Do you want to play again?" << endl << "0 - yes" << endl << "1 - no" << endl;
+		cin >> again;
+		if (again == 0)
+		{
+			return RockPaperScissors();
+		}
+		else if (again == 1)
+		{
+			cout << "Thank you for playing!" << endl;
+			return;
+		}
+		else 
+		{
+			if (again > 1 || again < 0)
+			{
+				cout << "Invalid option, the program will close" << endl;
+
+			}
+		}
 }
