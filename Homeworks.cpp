@@ -1,19 +1,24 @@
 #include <iostream>
+#include<cstdlib>
 
 using namespace std;
 
 void tarea1();
+void RockPaperScissors();
 int main()
 {
 	int homework;
 
-	cout << "Bienvenido a mis tareas\n Cual tarea desea ver?";
+	cout << "Bienvenido a mis tareas\n Cual tarea desea ver?" << endl << "Tarea 1" << endl << "Rock, Paper & Scissors" << endl;
 	cin >> homework;
 
 	switch (homework)
 	{
 	case 1:
 		tarea1();
+		break;
+	case 2:
+		RockPaperScissors();
 		break;
 	default:
 		break;
@@ -149,4 +154,67 @@ void tarea1()
 	default:
 		break;
 	}
+}
+
+void RockPaperScissors()
+{
+	int counterPlayer = 0;
+	int counterEnemy = 0;
+	srand(time(NULL));
+	do
+	{
+		system("cls");
+		int enemy = (rand() % 3) + 1;
+		int option = 0;
+
+		cout << enemy << endl;
+		if (enemy == 1)
+		{
+			cout << "   The cpu chose rock!" << endl;
+		}
+		else if (enemy == 2)
+		{
+			cout << "   The cpu chose paper!" << endl;
+		}
+		else if (enemy == 3)
+		{
+			cout << "   The cpu chose scissors!" << endl;
+		}
+
+		cout << endl;
+
+		cout << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
+		cout << "Choose your option" << endl << "1 - rock" << endl << "2 - paper" << endl << "3 - scissors" << endl;
+		cin >> option;
+
+		switch (option)
+		{
+		case 1:
+			if (option < enemy)
+			{
+				cout << "You lose" << endl;
+				counterEnemy += 1;
+			}
+			else if (option == enemy)
+			{
+				cout << "You tied" << endl;
+			}
+			else if (option == 1 && enemy == 3)
+			{
+				cout << "You win" << endl;
+				counterPlayer += 1;
+			}
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		default:
+			break;
+		}
+		system("pause");
+	} while (counterEnemy < 2 && counterPlayer < 2);
+	cout << endl << "           Final Score" << endl << "Player: " << counterPlayer << "      " << "CPU: " << counterEnemy << endl;
 }
