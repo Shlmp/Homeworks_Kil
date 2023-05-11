@@ -1,16 +1,20 @@
 #include <iostream>
-#include<cstdlib>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
 
 using namespace std;
 
 void tarea1();
 void RockPaperScissors();
 void replay();
+void Hangman();
 int main()
 {
 	int homework;
 
-	cout << "Bienvenido a mis tareas\n Cual tarea desea ver?" << endl << "Tarea 1" << endl << "Rock, Paper & Scissors" << endl;
+	cout << "Bienvenido a mis tareas!\nCual tarea desea ver?" << endl << "1 - Tarea 1" << endl << "2 - Rock, Paper & Scissors" << endl << "3 - Hangman" << endl;
 	cin >> homework;
 
 	switch (homework)
@@ -20,6 +24,9 @@ int main()
 		break;
 	case 2:
 		RockPaperScissors();
+		break;
+	case 3:
+		Hangman();
 		break;
 	default:
 		break;
@@ -277,4 +284,46 @@ void replay()
 
 			}
 		}
+}
+
+void Hangman()
+{
+	system("cls");
+	vector<string> word = { "HELLO", "WATER", "HAT", "COMPUTER" };
+	string letters = "";
+	char player;
+	int lives = 6;
+	
+	//Random word
+	srand(time(NULL));
+	int randomNumber = rand();
+	int wordsRandomIndex = (randomNumber % word.size());
+	const string WORD = word[wordsRandomIndex];
+	cout << WORD << endl;
+	string soFar(WORD.size(), '-');
+
+	cout << "_________" << endl;
+	cout << "|        |" << endl;
+	cout << "|        " << endl;
+	cout << "|        " << endl;
+	cout << "|        " << endl;
+	cout << "|        " << endl;
+	cout << "___________" << endl;
+	cout << "Your word has:" << endl;
+		cout << soFar << endl << "Try and guess" << endl;
+	cin >> player;
+	player = toupper(player);
+
+	if (WORD.find(player) != string::npos)
+	{
+		for (int i = 0; i < WORD.length(); i++)
+		{
+			if (WORD[i] == player)
+			{
+				soFar[i] == player;
+			}
+		}
+	}
+	cout << soFar;
+	return;
 }
