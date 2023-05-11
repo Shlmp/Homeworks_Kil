@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <cctype>
 
 using namespace std;
 
@@ -292,7 +293,7 @@ void Hangman()
 	vector<string> word = { "HELLO", "WATER", "HAT", "COMPUTER" };
 	string letters = "";
 	char player;
-	int lives = 6;
+	int lives = 0;
 	
 	//Random word
 	srand(time(NULL));
@@ -309,21 +310,119 @@ void Hangman()
 	cout << "|        " << endl;
 	cout << "|        " << endl;
 	cout << "___________" << endl;
-	cout << "Your word has:" << endl;
-		cout << soFar << endl << "Try and guess" << endl;
-	cin >> player;
-	player = toupper(player);
-
-	if (WORD.find(player) != string::npos)
+	do
 	{
-		for (int i = 0; i < WORD.length(); i++)
+		cout << "You have  used: " << letters << endl;
+		cout << "Your word has:" << endl;
+		cout << soFar << endl << "Try and guess" << endl;
+		do
 		{
-			if (WORD[i] == player)
+			cout << "Write a letter" << endl;
+			cin >> player;
+		} while (!((player >= 'a' && player <= 'z') || (player >= 'A' && player <= 'Z')));  //Obliga al jugador a usar solo los caractéres entre a - z, ya sean e minúsculas o mayúsculas
+
+		player = toupper(player);  // Vuelve todas las letras del jugador a Mayúsculas
+		if (WORD.find(player) != string::npos)
+		{
+			for (int i = 0; i < WORD.length(); i++)
 			{
-				soFar[i] == player;
+				if (WORD[i] == player)
+				{
+					soFar[i] = player;
+				}
+			}
+			cout << soFar << endl;
+		}
+		else
+		{
+			lives++;
+			letters += player;
+			cout << "You guessed wrong" << endl;
+			switch (lives)
+			{
+			case 0:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 1:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 2:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|        |" << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 3:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|       /|" << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 4:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|       /|\\" << endl;
+				cout << "|        " << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 5:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|       /|\\" << endl;
+				cout << "|       /" << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				break;
+			case 6:
+				system("cls");
+				cout << "_________" << endl;
+				cout << "|        |" << endl;
+				cout << "|        O" << endl;
+				cout << "|       /|\\" << endl;
+				cout << "|       / \\" << endl;
+				cout << "|        " << endl;
+				cout << "___________" << endl;
+				cout << "YOU LOSE";
+				break;
 			}
 		}
-	}
-	cout << soFar;
+		if (player == letters.find(player))
+		{
+			cout << "That letter already was given" << endl;
+		}
+
+
+		if (soFar == WORD)
+		{
+			cout << "YOU WIN";
+		}
+	} while (soFar != WORD && lives < 6);
 	return;
 }
